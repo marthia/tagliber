@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:background="@drawable/background_gradient"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/oldeng"
+            android:text="Tagliber"
+            android:textColor="#FFFFFF"
+            android:textSize="48dp" />
+
+    <me.oleg.tagliber.CircularImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_person_outline_black_24dp"
+            app:civ_border_color="#0288D1"
+            app:civ_border_width="2dp"
+            app:civ_shadow="true"
+            android:backgroundTint="#faf"
+            app:civ_shadow_color="#353535"
+            app:civ_shadow_radius="10" />
+
+
+</FrameLayout>

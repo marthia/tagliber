@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_close_black_24dp</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="actionModeBackground">@color/background_action_mode</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+
+
+    <color name="color_grey">#aaaaaa</color>
+
+    <style name="NavigationStyle">
+        <item name="android:colorBackground">#D6D6D6</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_bottom_sheet</item>
+    </style>
+</resources>
