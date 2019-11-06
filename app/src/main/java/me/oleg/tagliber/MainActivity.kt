@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -24,7 +24,7 @@ import me.oleg.tagliber.viewmodels.NoteViewModel
 class MainActivity : AppCompatActivity() {
 
     private val IS_LOCKED: Boolean = true
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var b: ActivityMainBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -36,26 +36,36 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        b = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val factory = InjectorUtils.provideNoteRepository(application)
 
         viewModel = ViewModelProviders.of(this, factory)
             .get(NoteViewModel::class.java)
 
-        drawerLayout = binding.drawerLayout
+        drawerLayout = b.drawerLayout
 
-        navController = Navigation.findNavController(this, R.id.main_nav_fragment)
+        navController = findNavController(R.id.main_nav_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         // Set up ActionBar
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(b.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Set up navigation menu
-        binding.navigationView.setupWithNavController(navController)
+        b.toolbar.setupWithNavController(
+            navController,
+            appBarConfiguration
+        )
 
-        binding.navigationView.setNavigationItemSelectedListener {
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.note_detail_fragment || destination.id == R.id.search_list_fragment) {
+                b.toolbar.visibility = View.GONE
+            } else b.toolbar.visibility = View.VISIBLE
+        }
+
+        b.navigationView.setNavigationItemSelectedListener {
             it.isChecked = true
             drawerLayout.closeDrawers()
             return@setNavigationItemSelectedListener when (it.itemId) {
@@ -123,8 +133,4 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
-
-//    fun onNewNoteClick(view: View) {
-//        startActivity(Intent(this, NewNoteActivity::class.java))
-//    }
 }
