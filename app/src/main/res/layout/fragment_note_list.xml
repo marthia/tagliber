@@ -4,50 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <!--<com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:background="@android:color/transparent"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+            android:layoutAnimation="@anim/animation_layout"
+            android:paddingBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/list_note_item" />
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentScrim="@color/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/rounded_toolbar"
-                    app:buttonGravity="center_vertical"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_new_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#DF3A3A"
+            android:tint="@android:color/white"
+            app:fabSize="normal"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:rippleColor="#FFABAB"
+            app:srcCompat="@drawable/ic_create_white_24dp"/>
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>-->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutAnimation="@anim/animation_layout"
-                android:paddingBottom="8dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/list_note_item" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -17,7 +17,7 @@ interface NoteDao {
     fun insertAll(noteViewModels: List<Note>)
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNote(note : Note)
 
     @Update

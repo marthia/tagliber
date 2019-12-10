@@ -3,10 +3,8 @@ package me.oleg.tagliber.fragment
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.*
-import android.widget.FrameLayout
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,13 +14,11 @@ import androidx.recyclerview.selection.Selection
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import me.oleg.tagliber.R
 import me.oleg.tagliber.adapters.*
 import me.oleg.tagliber.data.Note
 import me.oleg.tagliber.databinding.FragmentNoteListBinding
 import me.oleg.tagliber.utitlies.InjectorUtils
-import me.oleg.tagliber.utitlies.getCurrentDateTime
 import me.oleg.tagliber.viewmodels.NoteViewModel
 
 
@@ -54,6 +50,8 @@ class NoteListFragment : Fragment(),
 
         subscribeUi(adapter)
 
+        binding.fabNewNote.setOnClickListener { NoteListFragmentDirections.actionNewNoteEditor() }
+
         return binding.root
     }
 
@@ -70,7 +68,7 @@ class NoteListFragment : Fragment(),
 
     private fun initTracker() {
 
-        tracker = SelectionTracker.Builder<Long>(
+        tracker = SelectionTracker.Builder(
 
             "mySelection",
             binding.listView,

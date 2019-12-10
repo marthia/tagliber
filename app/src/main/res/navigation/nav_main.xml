@@ -1,67 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        app:startDestination="@id/note_list_fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/note_list_fragment">
 
     <fragment
-            android:id="@+id/authentication_panel_fragment"
-            android:name="me.oleg.tagliber.fragment.AuthenticationPanelFragment"
-            android:label=""
-            tools:layout="@layout/fragment_blank" />
-
-    <fragment
-            android:id="@+id/note_list_fragment"
-            android:name="me.oleg.tagliber.fragment.NoteListFragment"
-            android:label=" "
-            tools:layout="@layout/fragment_note_list">
+        android:id="@+id/note_list_fragment"
+        android:name="me.oleg.tagliber.fragment.NoteListFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_note_list">
 
         <action
-                android:id="@+id/action_note_list_frag_to_detail"
-                app:destination="@id/note_detail_fragment"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_note_list_frag_to_detail"
+            app:destination="@id/note_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
 
         <action
-                android:id="@+id/action_sumbit_search_query"
-                app:destination="@id/search_list_fragment"
-                app:enterAnim="@anim/slide_up_inset"
-                app:exitAnim="@anim/slide_down_inset"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_sumbit_search_query"
+            app:destination="@id/search_list_fragment"
+            app:enterAnim="@anim/slide_up_inset"
+            app:exitAnim="@anim/slide_down_inset"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_new_note_editor"
+            app:destination="@id/new_note_fragment"
+            app:enterAnim="@anim/slide_up_inset"
+            app:exitAnim="@anim/slide_down_inset"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
-            android:id="@+id/note_detail_fragment"
-            android:name="me.oleg.tagliber.fragment.NoteDetailFragment"
-            android:label="">
+        android:id="@+id/note_detail_fragment"
+        android:name="me.oleg.tagliber.fragment.NoteDetailFragment"
+        android:label="">
         <argument
-                android:name="noteId"
-                app:argType="integer" />
+            android:name="noteId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/new_note_fragment"
+        android:name="me.oleg.tagliber.fragment.NoteDetailFragment"
+        android:label="">
     </fragment>
 
 
     <fragment
-            android:id="@+id/search_list_fragment"
-            android:name="me.oleg.tagliber.fragment.SearchFragment"
-            android:label=""
-            tools:layout="@layout/fragment_search">
+        android:id="@+id/search_list_fragment"
+        android:name="me.oleg.tagliber.fragment.SearchFragment"
+        android:label=""
+        tools:layout="@layout/fragment_search">
 
         <action
-                android:id="@+id/action_search_to_detail"
-                app:destination="@id/note_detail_fragment"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_search_to_detail"
+            app:destination="@id/note_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
         <argument
-                android:name="query"
-                android:defaultValue=" "
-                app:argType="string" />
+            android:name="query"
+            android:defaultValue=" "
+            app:argType="string" />
     </fragment>
 
 </navigation>

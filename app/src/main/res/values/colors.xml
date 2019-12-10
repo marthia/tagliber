@@ -5,4 +5,9 @@
     <color name="colorAccent">#303F9F</color>
 
     <color name="background_action_mode">#FFFFFF</color>
+    <color name="icon_fill_dark">#000000</color>
+    <color name="icon_fill_light">#FaFaFa</color>
+    <color name="text_color">#000000</color>
+
+
 </resources>

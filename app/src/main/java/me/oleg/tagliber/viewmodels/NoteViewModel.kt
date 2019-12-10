@@ -40,12 +40,6 @@ internal constructor(
 
     var filteredList = noteRepository.getNotes()
 
-    fun getNoteById(noteId: Int) = noteRepository.getNote(noteId)
-
-    fun insertOrUpdate(note: Note) {
-        noteRepository.insertNote(note)
-    }
-
     fun saveNewData(uri: Uri) {
 
         val htmlWithoutBrTags = extractData(uri)

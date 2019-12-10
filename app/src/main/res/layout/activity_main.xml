@@ -3,92 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
-        android:fitsSystemWindows="true"
-        tools:ignore="MergeRootFrame">
+        android:fitsSystemWindows="true">
 
-        <androidx.drawerlayout.widget.DrawerLayout
-            android:id="@+id/drawer_layout"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff"
+            tools:ignore="MergeRootFrame">
 
-            <LinearLayout
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="48dp"
+                android:elevation="0dp"
+                android:fitsSystemWindows="true"
+                android:theme="@style/AppTheme.AppBarOverlay">
 
-
-                <com.google.android.material.appbar.AppBarLayout
-                    android:id="@+id/appbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@android:color/transparent"
-                    android:theme="@style/AppTheme.AppBarOverlay">
-
-                    <com.google.android.material.appbar.CollapsingToolbarLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:contentScrim="@color/colorPrimary"
-                        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
-
-                        <androidx.appcompat.widget.Toolbar
-                            android:id="@+id/toolbar"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:background="@drawable/rounded_toolbar"
-                            app:buttonGravity="center_vertical"
-                            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-                            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-                    </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-                </com.google.android.material.appbar.AppBarLayout>
-
-
-                <fragment
-                    android:id="@+id/main_nav_fragment"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:defaultNavHost="true"
-                    app:navGraph="@navigation/nav_main" />
+                    android:background="#FFFFFF"
+                    app:buttonGravity="center_vertical"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-            </LinearLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
 
-            <com.google.android.material.navigation.NavigationView
-                android:id="@+id/navigation_view"
-                style="@style/NavigationStyle"
-                android:layout_width="wrap_content"
+            <fragment
+                android:id="@+id/main_nav_fragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
-                app:headerLayout="@layout/nav_header"
-                app:menu="@menu/menu_navigation" />
+                app:defaultNavHost="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:navGraph="@navigation/nav_main" />
 
-        </androidx.drawerlayout.widget.DrawerLayout>
-
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--                android:id="@+id/fab_new_note"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="bottom|end"-->
-        <!--                android:layout_marginEnd="16dp"-->
-        <!--                android:layout_marginBottom="16dp"-->
-        <!--                android:backgroundTint="#DF3A3A"-->
-        <!--                android:onClick="onNewNoteClick"-->
-        <!--                android:tint="@android:color/white"-->
-        <!--                app:fabSize="normal"-->
-        <!--                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"-->
-        <!--                app:rippleColor="#FFABAB"-->
-        <!--                app:srcCompat="@drawable/ic_create_black_24dp"/>-->
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
+            style="@style/NavigationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/menu_navigation" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

@@ -66,16 +66,16 @@ class NoteListAdapter : PagedListAdapter<Note, NoteListAdapter.ViewHolder>(
             binding.apply {
                 clickListener = listener
                 note = item
-                executePendingBindings()
+               // executePendingBindings()
             }
         }
 
         fun handleSelection(note: Note?, isActivated: Boolean) {
             itemView.isActivated = isActivated
 
-            if (isActivated) {
-
-            }
+//            if (isActivated) {
+//
+//            }
         }
 
         fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
