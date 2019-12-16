@@ -7,6 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -14,24 +15,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutAnimation="@anim/animation_layout"
-            android:paddingBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_note_item" />
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_new_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="#DF3A3A"
             android:tint="@android:color/white"
             app:fabSize="normal"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
             app:rippleColor="#FFABAB"
-            app:srcCompat="@drawable/ic_create_white_24dp"/>
+            app:srcCompat="@drawable/ic_create_white_24dp"/>-->
+
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

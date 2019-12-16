@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.selection.Selection
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
@@ -49,8 +50,6 @@ class NoteListFragment : Fragment(),
         binding.listView.adapter = adapter
 
         subscribeUi(adapter)
-
-        binding.fabNewNote.setOnClickListener { NoteListFragmentDirections.actionNewNoteEditor() }
 
         return binding.root
     }
@@ -110,7 +109,7 @@ class NoteListFragment : Fragment(),
         (menu.findItem(R.id.menu_search)?.actionView as SearchView).apply {
 
             setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
-            setIconifiedByDefault(false)
+            setIconifiedByDefault(true)
             queryHint = "Select Notes"
 
             queryTextListener = object : SearchView.OnQueryTextListener {
@@ -132,6 +131,17 @@ class NoteListFragment : Fragment(),
             setOnQueryTextListener(queryTextListener)
         }
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.menu_add -> {
+                findNavController().navigate(NoteListFragmentDirections.actionNewNoteEditor())
+                true
+            }
+            else -> false
+        }
     }
 
     private fun subscribeUi(adapter: NoteListAdapter) {

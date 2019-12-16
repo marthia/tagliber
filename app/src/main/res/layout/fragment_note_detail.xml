@@ -10,11 +10,15 @@
             type="me.oleg.tagliber.data.Note" />
     </data>
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".NoteDetailActivity">
 
         <EditText
@@ -26,6 +30,8 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_edit_text"
             android:fontFamily="@font/tanha"
+            android:maxLines="1"
+            android:imeOptions="flagNavigateNext"
             android:text="@{note.title}"
             android:textColor="@color/text_color"
             android:textSize="18sp"
@@ -35,15 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
-            android:id="@+id/content_scroller"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/time_stamp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title">
+
 
             <EditText
                 android:id="@+id/content"
@@ -54,16 +52,15 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/background_edit_text"
-                android:ellipsize="end"
                 android:fontFamily="@font/vazir"
-                android:scrollIndicators="right"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:scrollbarStyle="insideInset"
                 android:text="@{note.content}"
                 android:textColor="#2B2B2B"
-                android:textIsSelectable="true"
-                android:textSize="16sp" />
-        </ScrollView>
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/time_stamp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
         <TextView
             android:id="@+id/time_stamp"
@@ -83,8 +80,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content_scroller" />
+            app:layout_constraintTop_toBottomOf="@+id/content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

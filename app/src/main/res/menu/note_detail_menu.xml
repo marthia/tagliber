@@ -6,4 +6,11 @@
         android:icon="@drawable/ic_info_outline_black_24dp"
         android:title="info"
         app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/menu_save"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="save"
+        app:showAsAction="always" />
 </menu>

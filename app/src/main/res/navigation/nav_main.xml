@@ -49,6 +49,10 @@
         android:id="@+id/new_note_fragment"
         android:name="me.oleg.tagliber.fragment.NoteDetailFragment"
         android:label="">
+        <argument
+            android:name="noteId"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
 
 
