@@ -29,11 +29,7 @@
 
         <action
             android:id="@+id/action_new_note_editor"
-            app:destination="@id/new_note_fragment"
-            app:enterAnim="@anim/slide_up_inset"
-            app:exitAnim="@anim/slide_down_inset"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/new_note_fragment" />
     </fragment>
 
     <fragment

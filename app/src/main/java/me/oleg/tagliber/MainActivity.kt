@@ -58,12 +58,6 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            if (destination.id == R.id.note_detail_fragment || destination.id == R.id.search_list_fragment) {
-//                b.toolbar.visibility = View.GONE
-//            } else b.toolbar.visibility = View.VISIBLE
-//        }
-
         b.navigationView.setNavigationItemSelectedListener {
             it.isChecked = true
             drawerLayout.closeDrawers()

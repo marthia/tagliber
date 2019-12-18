@@ -14,28 +14,49 @@ internal constructor(
     fun getNoteById(noteId: Int) =
         noteRepository.getNote(noteId)
 
-    fun saveChanges(id: Int, title: String, text: String) {
+
+    fun save(id: Int, title: String, text: String) {
+        if (id == -1) {
+            saveNewNote(
+                title,
+                text
+            )
+        } else {
+            saveChanges(
+                id,
+                title,
+                text
+            )
+        }
+    }
+
+    private fun saveChanges(id: Int, title: String, text: String) {
 
         noteRepository.updateNote(
             Note(
                 noteId = id,
                 title = title,
                 content = text,
-                timeStamp = getCurrentDateTime())
+                timeStamp = getCurrentDateTime()
+            )
         )
     }
 
 
-    fun saveNewNote(title: String, text: String) {
+    private fun saveNewNote(title: String, text: String) {
 
         noteRepository.insertNote(
             Note(
                 title = title,
                 content = text,
-                timeStamp = getCurrentDateTime())
+                timeStamp = getCurrentDateTime()
+            )
         )
     }
 
-
+    fun shouldShowExitDialog(noteId: Int, note: Note?): Boolean {
+        val item = noteRepository.getNote(noteId)
+        return item.value === note
+    }
 
 }

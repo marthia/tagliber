@@ -2,11 +2,17 @@ package me.oleg.tagliber.fragment
 
 
 import android.os.Bundle
+import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import me.oleg.tagliber.R
 import me.oleg.tagliber.databinding.FragmentNoteDetailBinding
 import me.oleg.tagliber.utitlies.InjectorUtils
@@ -21,6 +27,22 @@ class NoteDetailFragment : Fragment() {
     private var noteId: Int = -1
     private lateinit var binding: FragmentNoteDetailBinding
     private lateinit var viewModel: NoteDetailViewModel
+    private var isTextChanged = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // This callback will only be called when MyFragment is at least Started.
+        // This callback will only be called when MyFragment is at least Started.
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() { // Handle the back button event
+                    if (isTextChanged)
+                        showConfirmationDialog()
+                    else findNavController().navigateUp()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +56,6 @@ class NoteDetailFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-//        findNavController().addOnDestinationChangedListener { _, destination, _ ->
-//            if (destination.id == R.id.note_detail_fragment || destination.id == R.id.search_list_fragment) {
-//                b.toolbar.visibility = View.GONE
-//            } else b.toolbar.visibility = View.VISIBLE
-//            }
-//        }
-
         noteId = arguments.let {
             NoteDetailFragmentArgs.fromBundle(
                 it!!
@@ -51,33 +66,77 @@ class NoteDetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory)
             .get(NoteDetailViewModel::class.java)
 
-        if (noteId != -1) {
-            val liveData = noteId.let { viewModel.getNoteById(it) }
-            liveData.observe(this, Observer { note ->
-                note?.let {
-                    binding.note = note
-                }
-            })
+        val liveData = noteId.let { viewModel.getNoteById(it) }
+        liveData.observe(this, Observer { note ->
+            note?.let {
+                binding.note = note
 
-        }
-        /* binding.title.addTextChangedListener(object : TextWatcher {
-             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-                 // TODO Auto-generated method stub
-             }
-
-             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
-                 // TODO Auto-generated method stub
-             }
-
-             override fun afterTextChanged(s: Editable) {
-                 viewModel.insertOrUpdate(note)
-             }
-         })*/
-
+                // delay textWatcher attachment for the view to have time for a complete population
+                Handler().postDelayed({ setTextWatchers() }, 2000)
+            }
+        })
 
         return binding.root
+    }
+
+    private fun setTextWatchers() {
+
+        // add text watchers for exit dialog
+        binding.content.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isTextChanged = true
+            }
+        })
+
+        binding.title.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isTextChanged = true
+            }
+        })
+    }
+
+    private fun showConfirmationDialog() {
+        val builder = AlertDialog.Builder(activity!!)
+
+        // Set the alert dialog title
+        builder.setTitle("Confirm")
+
+        // Display a message on alert dialog
+        builder.setMessage("Exit without saving?")
+
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton("YES") { dialog, which ->
+            findNavController().navigateUp()
+        }
+        builder.setNeutralButton("SAVE") { dialog, which ->
+            viewModel.save(
+                noteId,
+                binding.title?.text.toString(),
+                binding.content?.text.toString()
+            ).also {
+                findNavController().navigateUp()
+            }
+        }
+
+        builder.setNegativeButton("NO") { dialog, which ->
+            // do nothing
+        }
+
+
+        builder.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -94,26 +153,20 @@ class NoteDetailFragment : Fragment() {
             }
 
             R.id.menu_save -> {
-                if (noteId == -1) {
-                    viewModel.saveNewNote(
-                        binding.title.text.toString(),
-                        binding.content.text.toString()
-                    )
-                } else {
-                    binding.note?.let {
-                        viewModel.saveChanges(
-                            it.noteId,
-                            binding.title.text.toString(),
-                            binding.content.text.toString()
-                        )
-                    }
-                }
+
+                viewModel.save(
+                    noteId,
+                    binding.title?.text.toString(),
+                    binding.content?.text.toString()
+                )
                 Toast.makeText(
                     binding.root.context,
                     "successfully saved",
                     Toast.LENGTH_SHORT
                 )
                     .show()
+
+                isTextChanged = false
                 true
             }
             else -> false

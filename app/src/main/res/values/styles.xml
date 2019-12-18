@@ -12,6 +12,7 @@
         <item name="actionModeBackground">@color/background_action_mode</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="searchViewStyle">@style/searchViewStyle</item>
+        <item name="android:navigationIcon">@drawable/ic_short_text_black_24dp</item>
     </style>
 
 
@@ -39,6 +40,8 @@
     <style name="searchViewStyle" parent="Widget.AppCompat.Light.SearchView">
         <item name="submitBackground">@android:color/transparent</item>
         <item name="queryBackground">@android:color/transparent</item>
+        <item name="closeIcon">@drawable/ic_close_black_24dp</item>
+        <item name="searchIcon">@drawable/ic_search_black_24dp</item>
     </style>
 
     <style name="ImageButtonStyle" parent="Widget.AppCompat.ImageButton">
