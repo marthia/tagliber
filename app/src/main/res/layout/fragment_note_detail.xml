@@ -7,7 +7,7 @@
 
         <variable
             name="note"
-            type="me.oleg.tagliber.data.Note" />
+            type="me.oleg.taglibro.data.Note" />
     </data>
 
     <androidx.core.widget.NestedScrollView

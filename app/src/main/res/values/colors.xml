@@ -10,11 +10,12 @@
     <color name="text_color">@color/colorBlack</color>
 
     <color name="navTextColorSelected">#A80404</color>
-    <color name="navTextColorSelectedBackground">#4DA80404</color>
+    <color name="navTextColorSelectedBackground">#33A80404</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 
-
+    <color name="navHeaderColor">#ECECEC</color>
+    <color name="secondaryDarkGrey">#A0A0A0</color>
 
     <color name="bottomToolbarTint">#A80404</color>
 

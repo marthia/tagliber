@@ -2,12 +2,35 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/content_resolver"
-            android:icon="@drawable/ic_add_circle_outline_black_24dp"
-            android:title="Content Extractor" />
+        android:id="@+id/notes"
+        android:checkable="true"
+        android:checked="true"
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_speaker_notes_black_24dp"
+        android:title="Notes" />
 
     <item
-            android:id="@+id/notes"
-            android:icon="@drawable/ic_speaker_notes_black_24dp"
-            android:title="Notes" />
+        android:id="@+id/content_resolver"
+        android:checkable="true"
+        android:icon="@drawable/ic_add_circle_outline_black_24dp"
+        android:title="Content Extractor" />
+
+    <group android:menuCategory="secondary">
+        <item android:title="App">
+            <menu>
+                <item
+                    android:id="@+id/settings"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_settings_applications_black_24dp"
+                    android:title="Settings" />
+
+                <item
+                    android:id="@+id/about"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_announcement_black_24dp"
+                    android:title="About" />
+            </menu>
+        </item>
+    </group>
+
 </menu>

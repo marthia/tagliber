@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:background="#197A0000"
+    android:layout_height="128dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/navHeaderColor"
     android:gravity="bottom"
     android:orientation="vertical">
+
+    <me.oleg.taglibro.CircularImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        app:civ_border_width="1px"
+        app:civ_border_color="#666B6B6B"
+        android:src="@drawable/ic_person_outline_black_24dp"/>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vazir"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="81dp"
+        android:text="Bojerso"
+        android:textSize="18dp"/>
 
     <TextView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/oldeng"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/calligraphy"
         android:text="Taglibro"
-        android:textColor="#7A0000"
-        android:textSize="48dp" />
+        android:visibility="gone"
+        android:textColor="#000000"
+        android:textSize="72dp" />
 
 </FrameLayout>

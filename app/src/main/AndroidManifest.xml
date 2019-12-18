@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        package="me.oleg.tagliber">
+        package="me.oleg.taglibro">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -23,7 +23,7 @@
             tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-                android:name="me.oleg.tagliber.MainActivity"
+                android:name="me.oleg.taglibro.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
