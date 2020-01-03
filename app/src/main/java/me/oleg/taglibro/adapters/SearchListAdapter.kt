@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.oleg.taglibro.data.Note
-import me.oleg.taglibro.databinding.SearchListItemBinding
+import me.oleg.taglibro.databinding.ListNoteItemBinding
 import me.oleg.taglibro.fragment.SearchFragmentDirections
 
 class SearchListAdapter : ListAdapter<Note, SearchListAdapter.ViewHolder>(
@@ -16,7 +16,7 @@ class SearchListAdapter : ListAdapter<Note, SearchListAdapter.ViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            SearchListItemBinding.inflate(
+            ListNoteItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -44,7 +44,7 @@ class SearchListAdapter : ListAdapter<Note, SearchListAdapter.ViewHolder>(
     }
 
     class ViewHolder(
-        private val binding: SearchListItemBinding
+        private val binding: ListNoteItemBinding
 
     ) : RecyclerView.ViewHolder(binding.root) {
 

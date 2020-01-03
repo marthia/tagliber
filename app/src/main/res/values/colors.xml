@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/colorWhite</color>
     <color name="colorPrimaryDark">#00FFFFFF</color>
-    <color name="colorAccent">#303F9F</color>
+    <color name="colorAccent">#A80404</color>
 
     <color name="background_action_mode">@color/colorWhite</color>
     <color name="icon_fill_dark">@color/colorBlack</color>
@@ -14,7 +14,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="navHeaderColor">#ECECEC</color>
+    <color name="navHeaderColor">#33FF0C00</color>
     <color name="secondaryDarkGrey">#A0A0A0</color>
 
     <color name="bottomToolbarTint">#A80404</color>

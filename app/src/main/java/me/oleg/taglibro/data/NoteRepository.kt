@@ -18,6 +18,16 @@ class NoteRepository private constructor(
         }
     }
 
+//    fun getNotesJson(){
+//        runOnIoThread {
+//            noteDao.getNotesInJson()
+//                .observeOn(Schedulers.io())
+//                .subscribe(onSucess -> {
+//
+//        })
+//        }
+//    }
+
     fun updateNote(note: Note) {
         runOnIoThread {
             noteDao.updateNote(note)

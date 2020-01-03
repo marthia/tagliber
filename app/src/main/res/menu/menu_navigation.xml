@@ -10,10 +10,23 @@
         android:title="Notes" />
 
     <item
-        android:id="@+id/content_resolver"
+        android:id="@+id/audioNote"
         android:checkable="true"
-        android:icon="@drawable/ic_add_circle_outline_black_24dp"
-        android:title="Content Extractor" />
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_keyboard_voice_black_24dp"
+        android:title="Voice Notes" />
+
+    <group android:menuCategory="secondary">
+        <item android:title="Data">
+            <menu>
+                <item
+                    android:id="@+id/content_resolver"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_add_circle_outline_black_24dp"
+                    android:title="Content Extractor" />
+            </menu>
+        </item>
+    </group>
 
     <group android:menuCategory="secondary">
         <item android:title="App">

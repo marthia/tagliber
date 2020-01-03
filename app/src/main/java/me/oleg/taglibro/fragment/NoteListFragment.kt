@@ -3,6 +3,7 @@ package me.oleg.taglibro.fragment
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -48,6 +49,15 @@ class NoteListFragment : Fragment(),
 
         adapter = NoteListAdapter()
         binding.listView.adapter = adapter
+
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Handler().postDelayed({
+
+                // psudo fetch delay
+                binding.swipeRefreshLayout.isRefreshing = false
+            }, 2000)
+        }
 
         subscribeUi(adapter)
 
@@ -151,10 +161,12 @@ class NoteListFragment : Fragment(),
         viewModel = ViewModelProviders.of(this, factory)
             .get(NoteViewModel::class.java)
 
-
+        binding
 
         viewModel.noteList.observe(this, Observer { notes ->
-            if (notes != null && notes.isNotEmpty()) adapter.submitList(notes)
+            if (notes != null && notes.isNotEmpty())
+                binding.listView.invalidate()
+                adapter.submitList(notes)
         })
     }
 
@@ -173,6 +185,7 @@ class NoteListFragment : Fragment(),
                 }
 
                 viewModel.deleteData(pendingDeleteItems)
+                binding.listView.invalidate()
                 binding.listView.layoutManager?.removeAllViews()
 
                 actionModeCallback.finishActionMode()
