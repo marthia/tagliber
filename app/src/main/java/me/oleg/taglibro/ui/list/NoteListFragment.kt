@@ -1,11 +1,14 @@
-package me.oleg.taglibro.fragment
+package me.oleg.taglibro.ui.list
 
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,16 +21,18 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import me.oleg.taglibro.R
 import me.oleg.taglibro.adapters.*
-import me.oleg.taglibro.data.Note
+import me.oleg.taglibro.base.BaseFragment
+import me.oleg.taglibro.data.model.Note
 import me.oleg.taglibro.databinding.FragmentNoteListBinding
-import me.oleg.taglibro.utitlies.InjectorUtils
 import me.oleg.taglibro.viewmodels.NoteViewModel
+import me.oleg.taglibro.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class NoteListFragment : Fragment(),
+class NoteListFragment : BaseFragment(),
     OnActionModeDestroyCallback, OnActionItemClickListener {
     private lateinit var binding: FragmentNoteListBinding
     private lateinit var adapter: NoteListAdapter
@@ -36,17 +41,19 @@ class NoteListFragment : Fragment(),
     private lateinit var actionModeCallback: PrimaryActionModeCallback
     private lateinit var queryTextListener: SearchView.OnQueryTextListener
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentNoteListBinding.inflate(inflater, container, false)
+    override fun layoutRes(): Int = R.layout.fragment_note_list
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         adapter = NoteListAdapter()
         binding.listView.adapter = adapter
 
@@ -61,7 +68,6 @@ class NoteListFragment : Fragment(),
 
         subscribeUi(adapter)
 
-        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -98,7 +104,7 @@ class NoteListFragment : Fragment(),
                     if (selectedItems?.isEmpty == false) {
 
                         actionModeCallback.startActionMode(
-                            binding.root,
+                            binding.container,
                             R.menu.main_selection,
                             (selectedItems as Selection<Long>).size().toString()
                         )
@@ -156,17 +162,13 @@ class NoteListFragment : Fragment(),
 
     private fun subscribeUi(adapter: NoteListAdapter) {
 
-        val factory = InjectorUtils.provideNoteRepository(activity!!.application)
-
-        viewModel = ViewModelProviders.of(this, factory)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(NoteViewModel::class.java)
-
-        binding
 
         viewModel.noteList.observe(this, Observer { notes ->
             if (notes != null && notes.isNotEmpty())
                 binding.listView.invalidate()
-                adapter.submitList(notes)
+            adapter.submitList(notes)
         })
     }
 

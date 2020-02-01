@@ -1,34 +1,32 @@
-package me.oleg.taglibro.fragment
+package me.oleg.taglibro.ui.list
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import me.oleg.taglibro.R
 import me.oleg.taglibro.adapters.SearchListAdapter
-import me.oleg.taglibro.data.Note
+import me.oleg.taglibro.base.BaseFragment
+import me.oleg.taglibro.data.model.Note
 import me.oleg.taglibro.databinding.FragmentSearchBinding
-import me.oleg.taglibro.utitlies.InjectorUtils
 import me.oleg.taglibro.viewmodels.SearchViewModel
+import me.oleg.taglibro.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
     private lateinit var adapter: SearchListAdapter
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+
+    @Inject
+    lateinit var  viewModelFactory: ViewModelFactory
+
+    override fun layoutRes(): Int = R.layout.fragment_search
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = SearchListAdapter()
@@ -36,7 +34,9 @@ class SearchFragment : Fragment() {
 
         subscribeUi(adapter)
 
-        val query = arguments?.let { SearchFragmentArgs.fromBundle(it).query }
+        val query = arguments?.let { SearchFragmentArgs.fromBundle(
+            it
+        ).query }
 
         query?.let {
             activity?.title = it
@@ -47,9 +47,7 @@ class SearchFragment : Fragment() {
 
     private fun subscribeUi(adapter: SearchListAdapter) {
 
-        val factory = InjectorUtils.provideSearchRepository(activity!!)
-
-        searchViewModel = ViewModelProviders.of(this, factory)
+        searchViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(SearchViewModel::class.java)
     }
 

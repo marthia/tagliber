@@ -1,18 +1,19 @@
 package me.oleg.taglibro.viewmodels
 
 import androidx.lifecycle.ViewModel
-import me.oleg.taglibro.data.Note
-import me.oleg.taglibro.data.NoteRepository
+import me.oleg.taglibro.data.model.Note
+import me.oleg.taglibro.data.repositry.NoteRepository
 import me.oleg.taglibro.utitlies.getCurrentDateTime
+import javax.inject.Inject
 
 class NoteDetailViewModel
-internal constructor(
-    private val noteRepository: NoteRepository
+@Inject constructor(
+    private val noteRepository: NoteRepository,
+    private val noteId: Int
 ) :
     ViewModel() {
 
-    fun getNoteById(noteId: Int) =
-        noteRepository.getNote(noteId)
+    val note = noteRepository.getNote(noteId)
 
 
     fun save(id: Int, title: String, text: String) {

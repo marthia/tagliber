@@ -1,4 +1,4 @@
-package me.oleg.taglibro
+package me.oleg.taglibro.ui.main
 
 import android.app.Activity
 import android.content.Intent
@@ -15,19 +15,24 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import me.oleg.taglibro.R
 import me.oleg.taglibro.databinding.ActivityMainBinding
-import me.oleg.taglibro.utitlies.InjectorUtils
 import me.oleg.taglibro.viewmodels.NoteViewModel
+import me.oleg.taglibro.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val IS_LOCKED: Boolean = true
     private lateinit var b: ActivityMainBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     companion object {
         private const val READ_REQUEST_CODE: Int = 42
@@ -37,9 +42,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         b = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val factory = InjectorUtils.provideNoteRepository(application)
-
-        viewModel = ViewModelProviders.of(this, factory)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(NoteViewModel::class.java)
 
         drawerLayout = b.drawerLayout
@@ -112,7 +115,9 @@ class MainActivity : AppCompatActivity() {
             type = "*/*"
         }
 
-        startActivityForResult(intent, READ_REQUEST_CODE)
+        startActivityForResult(intent,
+            READ_REQUEST_CODE
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {

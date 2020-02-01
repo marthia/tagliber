@@ -1,5 +1,7 @@
 package me.oleg.taglibro.utitlies
 
+
+const val BASE_URL = ""
 const val DATABASE_NAME = "db_Notes"
 const val TITLE_CLASS_NAME = "title"
 const val CONTENT_CLASS_NAME = "content"

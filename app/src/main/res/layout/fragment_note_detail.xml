@@ -2,12 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
+        <import type="me.oleg.taglibro.data.model.Note"/>
         <variable
-            name="note"
-            type="me.oleg.taglibro.data.Note" />
+            name="viewModel"
+            type="me.oleg.taglibro.viewmodels.NoteDetailViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -34,7 +33,7 @@
                 android:singleLine="true"
                 android:imeOptions="actionNext"
                 android:nextFocusDown="@id/content"
-                android:text="@{note.title}"
+                android:text="@{viewModel.note.title}"
                 android:textColor="@color/text_color"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -53,7 +52,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/background_edit_text"
                 android:fontFamily="@font/vazir"
-                android:text="@{note.content}"
+                android:text="@{viewModel.note.content}"
                 android:textColor="#2B2B2B"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/time_stamp"
@@ -71,7 +70,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/josefin_sans"
-                android:text="@{note.timeStamp.trim()}"
+                android:text="@{viewModel.note.timeStamp.trim()}"
                 android:textAlignment="center"
                 android:textColor="#303F9F"
                 android:textStyle="italic"

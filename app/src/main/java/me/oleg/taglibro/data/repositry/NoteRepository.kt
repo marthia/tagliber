@@ -1,9 +1,11 @@
-package me.oleg.taglibro.data
+package me.oleg.taglibro.data.repositry
 
 import android.util.Log
+import me.oleg.taglibro.data.model.Note
 import me.oleg.taglibro.utitlies.runOnIoThread
+import javax.inject.Inject
 
-class NoteRepository private constructor(
+class NoteRepository @Inject constructor(
     private val noteDao: NoteDao
 ) {
 

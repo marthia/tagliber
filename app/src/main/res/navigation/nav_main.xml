@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/note_list_fragment"
-        android:name="me.oleg.taglibro.fragment.NoteListFragment"
+        android:name="me.oleg.taglibro.ui.list.NoteListFragment"
         android:label="Diary"
         tools:layout="@layout/fragment_note_list">
 
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/note_detail_fragment"
-        android:name="me.oleg.taglibro.fragment.NoteDetailFragment"
+        android:name="me.oleg.taglibro.ui.detail.NoteDetailFragment"
         android:label=" ">
         <argument
             android:name="noteId"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/new_note_fragment"
-        android:name="me.oleg.taglibro.fragment.NoteDetailFragment"
+        android:name="me.oleg.taglibro.ui.detail.NoteDetailFragment"
         android:label="New Note">
         <argument
             android:name="noteId"
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/search_list_fragment"
-        android:name="me.oleg.taglibro.fragment.SearchFragment"
+        android:name="me.oleg.taglibro.ui.list.SearchFragment"
         android:label=""
         tools:layout="@layout/fragment_search">
 

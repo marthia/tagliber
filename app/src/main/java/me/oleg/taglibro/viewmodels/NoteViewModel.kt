@@ -7,17 +7,18 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import me.oleg.taglibro.data.Note
-import me.oleg.taglibro.data.NoteRepository
+import me.oleg.taglibro.data.model.Note
+import me.oleg.taglibro.data.repositry.NoteRepository
 import me.oleg.taglibro.utitlies.CONTENT_CLASS_NAME
 import me.oleg.taglibro.utitlies.HTMLParser
 import me.oleg.taglibro.utitlies.TIMESTAMP_CLASS_NAME
 import me.oleg.taglibro.utitlies.TITLE_CLASS_NAME
 import java.io.File
 import java.nio.charset.Charset
+import javax.inject.Inject
 
 class NoteViewModel
-internal constructor(
+@Inject constructor(
     private val noteRepository: NoteRepository,
     application: Application
 ) :

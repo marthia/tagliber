@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import me.oleg.taglibro.data.Note
+import me.oleg.taglibro.data.model.Note
 import me.oleg.taglibro.databinding.ListNoteItemBinding
-import me.oleg.taglibro.fragment.SearchFragmentDirections
+import me.oleg.taglibro.ui.list.SearchFragmentDirections
 
 class SearchListAdapter : ListAdapter<Note, SearchListAdapter.ViewHolder>(
     NoteDiffCallback()

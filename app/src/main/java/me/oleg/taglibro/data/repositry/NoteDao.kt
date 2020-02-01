@@ -1,9 +1,10 @@
-package me.oleg.taglibro.data
+package me.oleg.taglibro.data.repositry
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import io.reactivex.Single
+import me.oleg.taglibro.data.model.Note
 
 @Dao
 interface NoteDao {

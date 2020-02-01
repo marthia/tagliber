@@ -8,9 +8,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
-import me.oleg.taglibro.data.Note
+import me.oleg.taglibro.data.model.Note
 import me.oleg.taglibro.databinding.ListNoteItemBinding
-import me.oleg.taglibro.fragment.NoteListFragmentDirections
+import me.oleg.taglibro.ui.list.NoteListFragmentDirections
 
 class NoteListAdapter : PagedListAdapter<Note, NoteListAdapter.ViewHolder>(
     NoteDiffCallback()

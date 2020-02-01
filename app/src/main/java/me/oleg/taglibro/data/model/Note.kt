@@ -1,4 +1,4 @@
-package me.oleg.taglibro.data
+package me.oleg.taglibro.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

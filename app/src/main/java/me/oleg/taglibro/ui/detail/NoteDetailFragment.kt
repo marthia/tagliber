@@ -1,11 +1,13 @@
-package me.oleg.taglibro.fragment
+package me.oleg.taglibro.ui.detail
 
 
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
@@ -13,20 +15,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import me.oleg.taglibro.R
+import me.oleg.taglibro.base.BaseFragment
 import me.oleg.taglibro.databinding.FragmentNoteDetailBinding
-import me.oleg.taglibro.utitlies.InjectorUtils
 import me.oleg.taglibro.viewmodels.NoteDetailViewModel
+import me.oleg.taglibro.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class NoteDetailFragment : Fragment() {
+class NoteDetailFragment : BaseFragment() {
 
-    private var noteId: Int = -1
     private lateinit var binding: FragmentNoteDetailBinding
+
+    val args: NoteDetailFragmentArgs by navArgs()
+
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private lateinit var viewModel: NoteDetailViewModel
+
     private var isTextChanged = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,39 +58,24 @@ class NoteDetailFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentNoteDetailBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+    override fun layoutRes(): Int = R.layout.fragment_note_detail
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setHasOptionsMenu(true)
 
-        noteId = arguments.let {
-            NoteDetailFragmentArgs.fromBundle(
-                it!!
-            ).noteId
-        }
-        val factory = InjectorUtils.provideNoteDetailRepository(activity!!.application)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(
+            NoteDetailViewModel::class.java
+        )
 
-        viewModel = ViewModelProviders.of(this, factory)
-            .get(NoteDetailViewModel::class.java)
-
-        val liveData = noteId.let { viewModel.getNoteById(it) }
-        liveData.observe(this, Observer { note ->
-            note?.let {
-                binding.note = note
-
-                // delay textWatcher attachment for the view to have time for a complete population
-                Handler().postDelayed({ setTextWatchers() }, 2000)
-            }
+        viewModel.note.observe(this, Observer {note ->
+            runBlocking {
+                delay(2000)
+                setTextWatchers() }
         })
 
-        return binding.root
+
     }
 
     private fun setTextWatchers() {
@@ -123,7 +122,7 @@ class NoteDetailFragment : Fragment() {
         }
         builder.setNeutralButton("SAVE") { dialog, which ->
             viewModel.save(
-                noteId,
+                args.noteId,
                 binding.title?.text.toString(),
                 binding.content?.text.toString()
             ).also {
@@ -156,12 +155,12 @@ class NoteDetailFragment : Fragment() {
             R.id.menu_save -> {
 
                 viewModel.save(
-                    noteId,
+                    args.noteId,
                     binding.title?.text.toString(),
                     binding.content?.text.toString()
                 )
                 Toast.makeText(
-                    binding.root.context,
+                    context,
                     "successfully saved",
                     Toast.LENGTH_SHORT
                 )

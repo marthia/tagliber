@@ -1,4 +1,4 @@
-package me.oleg.taglibro
+package me.oleg.taglibro.ui.views
 
 import android.content.Context
 import android.graphics.*
@@ -11,6 +11,7 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.appcompat.widget.AppCompatImageView
+import me.oleg.taglibro.R
 import kotlin.math.min
 
 /**
@@ -71,7 +72,8 @@ class CircularImageView @JvmOverloads constructor(
         set(value) {
             field = value
             if (field && shadowRadius == 0f)
-                shadowRadius = DEFAULT_SHADOW_RADIUS
+                shadowRadius =
+                    DEFAULT_SHADOW_RADIUS
             update()
         }
     //endregion
@@ -99,7 +101,8 @@ class CircularImageView @JvmOverloads constructor(
     private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         // Load the styled attributes and set their properties
         val attributes =
-            context.obtainStyledAttributes(attrs, R.styleable.CircularImageView, defStyleAttr, 0)
+            context.obtainStyledAttributes(attrs,
+                R.styleable.CircularImageView, defStyleAttr, 0)
 
         // Init Background Color
         circleColor =
