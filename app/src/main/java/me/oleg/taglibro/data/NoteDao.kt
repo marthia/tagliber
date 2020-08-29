@@ -11,9 +11,6 @@ interface NoteDao {
     @Query("SELECT * FROM t_Notes ORDER BY id DESC")
     fun getNotes(): DataSource.Factory<Int, Note>
 
-    @Query("SELECT * FROM t_Notes ORDER BY id DESC")
-    fun getNotesInJson() : Single<Note>
-
     @Query("SELECT * FROM t_Notes WHERE id = :id")
     fun getNoteById(id: Int): LiveData<Note>
 

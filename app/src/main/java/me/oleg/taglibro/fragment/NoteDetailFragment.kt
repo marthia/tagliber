@@ -11,7 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import me.oleg.taglibro.R
 import me.oleg.taglibro.databinding.FragmentNoteDetailBinding
@@ -63,7 +63,7 @@ class NoteDetailFragment : Fragment() {
         }
         val factory = InjectorUtils.provideNoteDetailRepository(activity!!.application)
 
-        viewModel = ViewModelProviders.of(this, factory)
+        viewModel = ViewModelProvider(this, factory)
             .get(NoteDetailViewModel::class.java)
 
         val liveData = noteId.let { viewModel.getNoteById(it) }

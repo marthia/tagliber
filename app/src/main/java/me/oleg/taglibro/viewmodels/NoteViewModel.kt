@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import me.oleg.taglibro.data.Note
@@ -75,8 +76,8 @@ internal constructor(
 
         val htmlText = inputStream?.bufferedReader().use { it?.readText() }
 
-        Log.i("ActivityResult1", htmlText)
-
+//        Log.i("ActivityResult1", htmlText)
+//
         val temp = htmlText
             ?.replace(
                 "<style.*>.*</style>".toRegex(RegexOption.DOT_MATCHES_ALL),
@@ -84,11 +85,15 @@ internal constructor(
             )
         val htmlWithoutBreaks = temp?.replace("<br>|</br>".toRegex(), "\n")
 
-        Log.i("ActivityResult2", htmlWithoutBreaks)
+//        Log.i("ActivityResult2", htmlWithoutBreaks)
 
         inputStream?.close()
 
         return htmlWithoutBreaks
+    }
+
+    fun find(query: String): LiveData<List<Note>> {
+        return  noteRepository.find("%$query%")
     }
 
 }

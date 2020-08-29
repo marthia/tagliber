@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2019 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+  in compliance with the License. You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software distributed under the License
+  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+  or implied. See the License for the specific language governing permissions and limitations under
+  the License.
+  -->
+<resources>
+
+    <!--Base theme, all common styling here-->
+    <style name="Base.Taglibro" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Taglibro.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Taglibro.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Taglibro.LargeComponent</item>
+
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Taglibro.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Taglibro.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Taglibro.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Taglibro.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Taglibro.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Taglibro.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Taglibro.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Taglibro.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Taglibro.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Taglibro.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Taglibro.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Taglibro.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Taglibro.Overline</item>
+
+        <!--Platform attributes-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_close_black_24dp</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="actionModeBackground">@color/background_action_mode</item>
+
+        <!--Platform text colors-->
+        <item name="android:textColorPrimary">@color/text_color_high_emphasis</item>
+        <item name="android:textColorSecondary">@color/text_color_medium_emphasis</item>
+        <item name="android:textColorTertiary">@color/text_color_low_emphasis</item>
+
+        <!--Default styles-->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="searchViewStyle">@style/searchViewStyle</item>
+        <item name="navigationViewStyle">@style/NavigationStyle</item>
+
+    </style>
+
+    <style name="Taglibro" parent="@style/Base.Taglibro">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="ThemeOverlay.Taglibro.TransitionShapeAppearance.Small" parent="">
+        <item name="transitionShapeAppearance">@style/ShapeAppearance.Taglibro.SmallComponent</item>
+    </style>
+
+</resources>

@@ -6,7 +6,6 @@ import me.oleg.taglibro.data.AppDatabase
 import me.oleg.taglibro.data.NoteRepository
 import me.oleg.taglibro.viewmodels.NoteDetailViewModelFactory
 import me.oleg.taglibro.viewmodels.NoteListViewModelFactory
-import me.oleg.taglibro.viewmodels.SearchViewModelFactory
 
 object InjectorUtils {
 
@@ -32,13 +31,6 @@ object InjectorUtils {
         val repository =
             getNoteRepository(context)
         return NoteDetailViewModelFactory(repository)
-    }
-
-    fun provideSearchRepository(
-        context: Context
-    ): SearchViewModelFactory {
-        val repository = getNoteRepository(context)
-        return SearchViewModelFactory(repository)
     }
 
 }

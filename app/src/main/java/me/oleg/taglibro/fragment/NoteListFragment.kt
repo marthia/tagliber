@@ -4,12 +4,13 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.selection.Selection
@@ -52,7 +53,7 @@ class NoteListFragment : Fragment(),
 
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
 
                 // psudo fetch delay
                 binding.swipeRefreshLayout.isRefreshing = false
@@ -118,7 +119,7 @@ class NoteListFragment : Fragment(),
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.menu_search)?.actionView as SearchView).apply {
 
-            setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
             setIconifiedByDefault(true)
             queryHint = "Select Notes"
 
@@ -156,14 +157,14 @@ class NoteListFragment : Fragment(),
 
     private fun subscribeUi(adapter: NoteListAdapter) {
 
-        val factory = InjectorUtils.provideNoteRepository(activity!!.application)
+        val factory = InjectorUtils.provideNoteRepository(requireActivity().application)
 
-        viewModel = ViewModelProviders.of(this, factory)
+        viewModel = ViewModelProvider(this, factory)
             .get(NoteViewModel::class.java)
 
         binding
 
-        viewModel.noteList.observe(this, Observer { notes ->
+        viewModel.noteList.observe(viewLifecycleOwner, Observer { notes ->
             if (notes != null && notes.isNotEmpty())
                 binding.listView.invalidate()
                 adapter.submitList(notes)
