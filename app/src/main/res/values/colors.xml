@@ -15,5 +15,13 @@
     <color name="secondaryDarkGrey">#A0A0A0</color>
 
     <color name="bottomToolbarTint">#A80404</color>
+    <color name="colorPrimaryVariant">#E2E2E2</color>
+    <color name="colorSecondaryVariant">#5C5C5C</color>
+    <color name="colorSecondary">#ffc3a0</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnError">#C0170B</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorBackground">#F0F0F0</color>
+    <color name="colorOnSecondary">#FF9800</color>
 
 </resources>

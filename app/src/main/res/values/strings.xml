@@ -8,4 +8,6 @@
     <string name="note_list_title">Notes</string>
     <string name="search_result">Search Result</string>
     <string name="new_note_hint">New Note</string>
+    <string name="title">Title</string>
+    <string name="content">Note</string>
 </resources>

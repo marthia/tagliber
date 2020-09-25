@@ -11,17 +11,13 @@
 
         <variable
             name="note"
-            type="me.oleg.taglibro.data.Note" />
+            type="me.oleg.taglibro.business.domain.model.Note" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/background_round_corner"
         android:clickable="true"
         android:focusable="true"
@@ -31,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity">
+        tools:context=".framework.presentation.MainActivity">
 
         <TextView
             android:id="@+id/title"
@@ -40,7 +36,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:textColor="?colorControlNormal"
             android:text="@{note.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -56,8 +53,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:textAppearance="?textAppearanceBody2"
-            android:maxLines="4"
+            android:maxLines="10"
+            android:textAppearance="?textAppearanceCaption"
             android:text="@{note.content}"
             app:layout_constraintBottom_toTopOf="@id/time_stamp"
             app:layout_constraintEnd_toEndOf="parent"

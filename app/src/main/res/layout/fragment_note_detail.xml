@@ -1,81 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="note"
-            type="me.oleg.taglibro.data.Note" />
+            type="me.oleg.taglibro.business.domain.model.Note" />
     </data>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content_scroller"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FAFAFA"
+        android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             tools:context=".NoteDetailActivity">
 
             <EditText
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/background_edit_text"
-                android:textAppearance="?textAppearanceBody1"
-                android:inputType="text"
-                android:singleLine="true"
+                android:background="@drawable/et_background"
+                android:hint="@string/title"
                 android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="text"
                 android:nextFocusDown="@id/content"
+                android:singleLine="true"
                 android:text="@{note.title}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textAppearance="?textAppearanceBody1"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />
 
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/background_edit_text"
+                android:background="@drawable/et_background"
+                android:hint="@string/content"
+                android:importantForAutofill="no"
                 android:text="@{note.content}"
-                android:textAppearance="?textAppearanceBody2"
-                app:layout_constraintBottom_toTopOf="@id/time_stamp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title" />
+                android:textAppearance="?textAppearanceBody2" />
 
-            <TextView
-                android:id="@+id/time_stamp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:textAppearance="?textAppearanceCaption"
-                android:text="@{note.timeStamp.trim()}"
-                android:textAlignment="center"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/content" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </layout>

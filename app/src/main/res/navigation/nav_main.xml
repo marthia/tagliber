@@ -6,26 +6,18 @@
 
     <fragment
         android:id="@+id/note_list_fragment"
-        android:name="me.oleg.taglibro.fragment.NoteListFragment"
+        android:name="me.oleg.taglibro.framework.presentation.notelist.NoteListFragment"
         android:label="Diary"
         tools:layout="@layout/fragment_note_list">
 
         <action
             android:id="@+id/action_note_list_frag_to_detail"
-            app:destination="@id/note_detail_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/note_detail_fragment" />
 
 
         <action
             android:id="@+id/action_sumbit_search_query"
-            app:destination="@id/search_list_fragment"
-            app:enterAnim="@anim/slide_up_inset"
-            app:exitAnim="@anim/slide_down_inset"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/search_list_fragment" />
 
         <action
             android:id="@+id/action_new_note_editor"
@@ -34,27 +26,27 @@
 
     <fragment
         android:id="@+id/note_detail_fragment"
-        android:name="me.oleg.taglibro.fragment.NoteDetailFragment"
+        android:name="me.oleg.taglibro.framework.presentation.notedetail.NoteDetailFragment"
         android:label=" ">
         <argument
             android:name="noteId"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/new_note_fragment"
-        android:name="me.oleg.taglibro.fragment.NoteDetailFragment"
+        android:name="me.oleg.taglibro.framework.presentation.notedetail.NoteDetailFragment"
         android:label="New Note">
         <argument
             android:name="noteId"
             android:defaultValue="-1"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
 
 
     <fragment
         android:id="@+id/search_list_fragment"
-        android:name="me.oleg.taglibro.fragment.SearchFragment"
+        android:name="me.oleg.taglibro.framework.presentation.notesearch.SearchFragment"
         android:label=""
         tools:layout="@layout/fragment_search">
 
