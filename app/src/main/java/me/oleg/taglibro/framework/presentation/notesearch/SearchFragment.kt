@@ -25,7 +25,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
@@ -46,12 +46,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun doMySearch(query: String) {
-        viewModel.get(query).observe(viewLifecycleOwner, { list ->
+        viewModel.get(query).observe(viewLifecycleOwner) { list ->
             if (list != null) {
                 adapter.setQuery(query = query)
                 adapter.submitList(list)
             }
-        })
+        }
 
     }
 

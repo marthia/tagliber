@@ -12,6 +12,7 @@ class PrimaryActionModeCallback(
 ) : ActionMode.Callback {
 
     private var mode: ActionMode? = null
+
     @MenuRes
     private var menuResId: Int = 0
     private var title: String? = null

@@ -34,8 +34,7 @@
                 android:nextFocusDown="@id/content"
                 android:singleLine="true"
                 android:text="@{note.title}"
-                android:textAppearance="?textAppearanceBody1"
-                android:textStyle="bold"
+                android:textAppearance="?textAppearanceTitleLarge"
                 tools:ignore="LabelFor" />
 
 
@@ -47,7 +46,8 @@
                 android:hint="@string/content"
                 android:importantForAutofill="no"
                 android:text="@{note.content}"
-                android:textAppearance="?textAppearanceBody2" />
+                android:textAppearance="?textAppearanceBodyMedium"
+                tools:text="This is a test" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

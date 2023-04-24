@@ -5,14 +5,14 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import me.oleg.taglibro.framework.datasource.database.AppDatabase
 import me.oleg.taglibro.framework.datasource.database.NoteDao
 import javax.inject.Singleton
 
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 object DataBaseModule {
 
@@ -32,7 +32,7 @@ object DataBaseModule {
 
     @Singleton
     @Provides
-    fun provideNoteDao(appDatabase: AppDatabase) : NoteDao {
+    fun provideNoteDao(appDatabase: AppDatabase): NoteDao {
         return appDatabase.noteDao()
     }
 }

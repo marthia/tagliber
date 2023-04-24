@@ -58,7 +58,7 @@ class SearchListAdapter : ListAdapter<Note, SearchListAdapter.ViewHolder>(
 
         fun bind(listener: View.OnClickListener, item: Note) {
 
-           // transformText(item)
+            // transformText(item)
 
             binding.apply {
                 clickListener = listener
@@ -75,12 +75,14 @@ class SearchListAdapter : ListAdapter<Note, SearchListAdapter.ViewHolder>(
             var indexOfQuery = content.indexOf(s, 0)
 
             if (indexOfQuery > 500) {
-               val stringBuilder = StringBuilder()
+                val stringBuilder = StringBuilder()
                 stringBuilder.append("...")
 
-               stringBuilder.append(item.content.slice(
-                   300 until (indexOfQuery + s.length + 100).coerceAtMost(content.length)
-               ))
+                stringBuilder.append(
+                    item.content.slice(
+                        300 until (indexOfQuery + s.length + 100).coerceAtMost(content.length)
+                    )
+                )
                 stringBuilder.append("...")
 
                 content = stringBuilder.toString()

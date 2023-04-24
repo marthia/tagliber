@@ -8,8 +8,11 @@ import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -18,9 +21,7 @@ import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.oleg.taglibro.R
 import me.oleg.taglibro.business.domain.model.Note
@@ -52,22 +53,25 @@ class NoteListFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNoteListBinding.inflate(inflater, container, false)
 
         noteListAdapter = NoteListAdapter()
+
         val spaceItemDecoration = SpaceItemDecoration(16)
         binding.listView.addItemDecoration(spaceItemDecoration)
+
         binding.listView.apply {
 
             adapter = noteListAdapter
             postponeEnterTransition()
             viewTreeObserver.addOnPreDrawListener {
-                    startPostponedEnterTransition()
-                    true
-                }
+                startPostponedEnterTransition()
+                true
+            }
         }
 
+        setupMenu()
 
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -81,6 +85,54 @@ class NoteListFragment : Fragment(),
         subscribeUi()
 
         return binding.root
+    }
+
+    private fun setupMenu() {
+
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main, menu)
+
+                val searchManager =
+                    activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                (menu.findItem(R.id.menu_search)?.actionView as SearchView).apply {
+
+                    setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+                    setIconifiedByDefault(true)
+                    queryHint = "Select Notes"
+
+                    queryTextListener = object : SearchView.OnQueryTextListener {
+
+                        override fun onQueryTextChange(newText: String): Boolean = false
+
+                        override fun onQueryTextSubmit(query: String): Boolean {
+
+                            view?.findNavController()?.navigate(
+                                NoteListFragmentDirections.actionSumbitSearchQuery(
+                                    query = query
+                                )
+                            )
+                            Log.i("onQueryTextSubmit", query)
+
+                            return true
+                        }
+                    }
+                    setOnQueryTextListener(queryTextListener)
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_add -> {
+                        findNavController().navigate(NoteListFragmentDirections.actionNewNoteEditor())
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -129,56 +181,12 @@ class NoteListFragment : Fragment(),
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main, menu)
-
-        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.menu_search)?.actionView as SearchView).apply {
-
-            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-            setIconifiedByDefault(true)
-            queryHint = "Select Notes"
-
-            queryTextListener = object : SearchView.OnQueryTextListener {
-
-                override fun onQueryTextChange(newText: String): Boolean = false
-
-                override fun onQueryTextSubmit(query: String): Boolean {
-
-                    view?.findNavController()?.navigate(
-                        NoteListFragmentDirections.actionSumbitSearchQuery(
-                            query = query
-                        )
-                    )
-                    Log.i("onQueryTextSubmit", query)
-
-                    return true
-                }
-            }
-            setOnQueryTextListener(queryTextListener)
-        }
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-            R.id.menu_add -> {
-                findNavController().navigate(NoteListFragmentDirections.actionNewNoteEditor())
-                true
-            }
-            else -> false
-        }
-    }
-
     private fun subscribeUi() {
 
         lifecycleScope.launch {
-
-            viewModel.getAll()
-                .onEach { pagingData -> noteListAdapter.submitData(pagingData) }
-                .catch { cause -> Log.e("errorPaging", cause.message ?: "") }
-                .collect()
+            viewModel.getAll().collectLatest {
+                noteListAdapter.submitData(it)
+            }
         }
     }
 

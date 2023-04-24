@@ -1,24 +1,27 @@
 package me.oleg.taglibro.framework.presentation.notedetail
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.oleg.taglibro.business.domain.model.Note
 import me.oleg.taglibro.business.interactors.NoteRepository
 import me.oleg.taglibro.utitlies.getCurrentDateTime
+import javax.inject.Inject
 
+@HiltViewModel
 class NoteDetailViewModel
-@ViewModelInject constructor(
-    private val noteRepository: NoteRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
+@Inject constructor(
+    private val noteRepository: NoteRepository
 ) :
     ViewModel() {
 
     private val insertedId = MutableLiveData<Long>()
 
     val changedId: LiveData<Long>
-    get() = insertedId
+        get() = insertedId
 
     fun getNoteById(noteId: Long) =
         noteRepository.getNote(noteId)
@@ -62,6 +65,12 @@ class NoteDetailViewModel
             )
         }
 
+    }
+
+    fun delete(note: Note) {
+        viewModelScope.launch {
+            noteRepository.deleteNotes(note = note)
+        }
     }
 
 

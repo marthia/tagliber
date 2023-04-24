@@ -1,15 +1,14 @@
 package me.oleg.taglibro.framework.datasource.database
 
 import androidx.lifecycle.LiveData
-import androidx.paging.PagingSource
 import androidx.room.*
 import me.oleg.taglibro.business.domain.model.Note
 
 @Dao
 interface NoteDao {
 
-    @Query("SELECT * FROM t_Notes ORDER BY id DESC")
-    fun getNotes(): PagingSource<Int, Note>
+    @Query("SELECT * FROM t_Notes  ORDER BY id ASC LIMIT :limit OFFSET :offset")
+    suspend fun getNotes(limit: Int, offset: Int): List<Note>
 
     @Query("SELECT * FROM t_Notes WHERE id = :id")
     fun getNoteById(id: Long): LiveData<Note>
@@ -19,7 +18,7 @@ interface NoteDao {
 
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertNote(note : Note) : Long
+    suspend fun insertNote(note: Note): Long
 
     @Update
     suspend fun updateNote(note: Note)

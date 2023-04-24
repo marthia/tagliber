@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (c) 2019 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -14,42 +13,63 @@
   -->
 <resources>
 
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <!--Base theme, all common styling here-->
-    <style name="Base.Taglibro" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.AppTheme" parent="Theme.Material3.Light.NoActionBar">
 
         <!--Material shape attributes-->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Taglibro.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Taglibro.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Taglibro.LargeComponent</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.AppTheme.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.AppTheme.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.AppTheme.LargeComponent
+        </item>
 
         <!--Material type attributes-->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.Taglibro.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.Taglibro.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.Taglibro.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.Taglibro.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.Taglibro.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.Taglibro.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.Taglibro.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.Taglibro.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.Taglibro.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.Taglibro.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.Taglibro.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.Taglibro.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.Taglibro.Overline</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.AppTheme.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.AppTheme.HeadlineMedium
+        </item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.AppTheme.HeadlineSmall</item>
+
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.AppTheme.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.AppTheme.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.AppTheme.DisplaySmall</item>
+
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.AppTheme.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.AppTheme.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.AppTheme.TitleSmall</item>
+
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.AppTheme.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.AppTheme.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.AppTheme.BodySmall</item>
+
+
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.AppTheme.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.AppTheme.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.AppTheme.LabelSmall</item>
 
         <!--Platform attributes-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorPrimaryContainer">@color/colorContainerPrimary</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnContainerPrimary</item>
+        <item name="colorSecondaryContainer">@color/colorContainerSecondary</item>
+        <item name="colorOnSecondaryContainer">@color/colorOnContainerSecondary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
         <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnPrimary">@color/color_primary_light</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:colorBackground">@color/colorOnPrimary</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
         <item name="colorOnError">@color/colorOnError</item>
         <item name="colorOnSurface">@color/color_primary_light</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
 
         <item name="actionModeCloseDrawable">@drawable/ic_close_black_24dp</item>
         <item name="windowActionModeOverlay">true</item>
@@ -65,13 +85,9 @@
         <item name="searchViewStyle">@style/searchViewStyle</item>
     </style>
 
-    <style name="Taglibro" parent="Base.Taglibro">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
-    <style name="ThemeOverlay.Taglibro.TransitionShapeAppearance.Small" parent="">
-        <item name="transitionShapeAppearance">@style/ShapeAppearance.Taglibro.SmallComponent</item>
+    <style name="ThemeOverlay.AppTheme.TransitionShapeAppearance.Small" parent="">
+        <item name="transitionShapeAppearance">@style/ShapeAppearance.AppTheme.SmallComponent</item>
     </style>
 
 </resources>

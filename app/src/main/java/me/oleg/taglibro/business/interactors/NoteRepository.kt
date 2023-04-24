@@ -9,11 +9,10 @@ class NoteRepository
 constructor(
     private val noteDao: NoteDao
 ) {
-    fun getNotes() = noteDao.getNotes()
 
     fun getNote(noteId: Long) = noteDao.getNoteById(noteId)
 
-    suspend fun insertNote(note: Note) : Long{
+    suspend fun insertNote(note: Note): Long {
         return noteDao.insertNote(note)
     }
 
@@ -21,10 +20,8 @@ constructor(
         scope.launch { noteDao.updateNote(note) }
     }
 
-    fun deleteNotes(scope: CoroutineScope, notes: Collection<Note>? = null, note: Note? = null) {
-        scope.launch {
-            notes?.let { noteDao.deleteNotes(it) } ?: noteDao.deleteNote(note!!)
-        }
+    suspend fun deleteNotes(notes: Collection<Note>? = null, note: Note? = null) {
+        notes?.let { noteDao.deleteNotes(it) } ?: noteDao.deleteNote(note!!)
     }
 
     fun find(keyword: String) = noteDao.find(keyword)

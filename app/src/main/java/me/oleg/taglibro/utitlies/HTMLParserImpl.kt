@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 class HTMLParserImpl(
     private val file: File,
     private val node: String
-): HTMLParser {
+) : HTMLParser {
 
     private val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
     private val builder: DocumentBuilder = factory.newDocumentBuilder()

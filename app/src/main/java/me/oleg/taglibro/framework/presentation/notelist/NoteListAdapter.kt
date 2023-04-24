@@ -8,10 +8,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
+import me.oleg.tagliber.databinding.ListNoteItemBinding
 import me.oleg.taglibro.business.domain.model.Note
-import me.oleg.taglibro.databinding.ListNoteItemBinding
 
-class NoteListAdapter: PagingDataAdapter<Note, NoteListAdapter.ViewHolder>(
+class NoteListAdapter : PagingDataAdapter<Note, NoteListAdapter.ViewHolder>(
     Note.NoteDiffCallback
 ) {
     var tracker: SelectionTracker<Long>? = null
@@ -75,8 +75,9 @@ class NoteListAdapter: PagingDataAdapter<Note, NoteListAdapter.ViewHolder>(
         }
 
         fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
+
             object : ItemDetailsLookup.ItemDetails<Long>() {
-                override fun getPosition(): Int = absoluteAdapterPosition
+                override fun getPosition(): Int = adapterPosition
                 override fun getSelectionKey(): Long? = itemId
             }
 

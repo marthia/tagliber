@@ -41,7 +41,8 @@
                     android:id="@+id/about"
                     android:checkable="true"
                     android:icon="@drawable/ic_announcement_black_24dp"
-                    android:title="About" />
+                    android:title="About"
+                    />
             </menu>
         </item>
     </group>
