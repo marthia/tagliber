@@ -26,6 +26,7 @@ object Dep {
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
     val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.room}" }
     val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
+    val swipeRefresh by lazy { "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}" }
 
     // optional - Kotlin Extensions and Coroutines support for Room
     val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }

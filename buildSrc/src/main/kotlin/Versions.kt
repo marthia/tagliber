@@ -32,4 +32,5 @@ object Versions {
     const val lifecycleViewmodel = "2.6.1"
     const val coroutines = "1.6.4"
     const val glide = "4.15.1"
+    const val swipeRefresh = "1.1.0"
 }

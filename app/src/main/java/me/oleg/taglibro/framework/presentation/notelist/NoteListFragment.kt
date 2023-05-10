@@ -3,10 +3,13 @@ package me.oleg.taglibro.framework.presentation.notelist
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -74,13 +77,13 @@ class NoteListFragment : Fragment(),
         setupMenu()
 
 
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            Handler(Looper.getMainLooper()).postDelayed({
-
-                // psudo fetch delay
-                binding.swipeRefreshLayout.isRefreshing = false
-            }, 2000)
-        }
+//        binding.swipeRefreshLayout.setOnRefreshListener {
+//            Handler(Looper.getMainLooper()).postDelayed({
+//
+//                // psudo fetch delay
+//                binding.swipeRefreshLayout.isRefreshing = false
+//            }, 2000)
+//        }
 
         subscribeUi()
 

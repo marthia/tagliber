@@ -8,8 +8,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
-import me.oleg.tagliber.databinding.ListNoteItemBinding
 import me.oleg.taglibro.business.domain.model.Note
+import me.oleg.taglibro.databinding.ListNoteItemBinding
 
 class NoteListAdapter : PagingDataAdapter<Note, NoteListAdapter.ViewHolder>(
     Note.NoteDiffCallback
@@ -44,7 +44,6 @@ class NoteListAdapter : PagingDataAdapter<Note, NoteListAdapter.ViewHolder>(
 //                    //2
 //                    it to note.noteId.toString()
 //                )
-
                 it.findNavController().navigate(
                     NoteListFragmentDirections.actionNoteListFragToDetail(
                         note.noteId.toString()
@@ -78,7 +77,7 @@ class NoteListAdapter : PagingDataAdapter<Note, NoteListAdapter.ViewHolder>(
 
             object : ItemDetailsLookup.ItemDetails<Long>() {
                 override fun getPosition(): Int = adapterPosition
-                override fun getSelectionKey(): Long? = itemId
+                override fun getSelectionKey(): Long = itemId
             }
 
     }

@@ -3,15 +3,16 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
     kotlin("kapt")
 }
 
 android {
-    namespace = "me.oleg.tagliber"
+    namespace = "me.oleg.taglibro"
     compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
-        applicationId = "me.oleg.tagliber"
+        applicationId = "me.oleg.taglibro"
         minSdk = ConfigData.minSdkVersion
         targetSdk = ConfigData.targetSdkVersion
         versionCode = ConfigData.versionCode
@@ -37,11 +38,11 @@ android {
                 isMinifyEnabled = false
                 //            shrinkResources true
                 proguardFiles(
-                        getDefaultProguardFile("proguard-android-optimize.txt"),
-                        "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
                 )
             }
-    }
+        }
     }
 
 
@@ -91,6 +92,7 @@ dependencies {
     implementation(Dep.materialDesign3)
     implementation(Dep.permissionAccompanist)
     implementation(Dep.hilt)
+    implementation(Dep.swipeRefresh)
     ksp(Dep.hiltCompiler)
 
     implementation(Dep.composeNavigationKtx)
